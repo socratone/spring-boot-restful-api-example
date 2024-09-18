@@ -22,9 +22,14 @@ public class UserDaoService {
         return users;
     }
 
-    public User findOne(int id) {
+    public User findById(int id) {
         Predicate<? super User> predicate = user -> user.getId().equals(id);
         return users.stream().filter(predicate).findFirst().orElse(null);
+    }
+
+    public void deleteById(int id) {
+        Predicate<? super User> predicate = user -> user.getId().equals(id);
+        users.removeIf(predicate);
     }
 
     public User saveUser(User user) {
