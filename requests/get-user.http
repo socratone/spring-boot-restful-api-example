@@ -1,0 +1,4 @@
+# REST Client를 이용해서 테스트 요청
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+GET http://localhost:8080/users/1

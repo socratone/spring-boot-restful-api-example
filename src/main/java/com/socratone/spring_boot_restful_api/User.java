@@ -2,10 +2,20 @@ package com.socratone.spring_boot_restful_api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+@Entity(name = "user-details")
 public class User {
+    protected User() {
+        // JPA는 생성자 필요
+    }
+
+    @Id
+    @GeneratedValue
     private Integer id;
 
     @Size(min = 2, message = "Name should have at least 2 characters.")

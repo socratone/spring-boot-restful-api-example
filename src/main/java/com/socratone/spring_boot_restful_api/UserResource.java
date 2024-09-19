@@ -13,38 +13,39 @@ import jakarta.validation.Valid;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserResource {
-    private UserDaoService service;
+    private UserRepository repository;
 
-    public UserResource(UserDaoService service) {
-        this.service = service;
+    public UserResource(UserRepository repository) {
+        this.repository = repository;
     }
 
     @GetMapping("/users")
     public List<User> getUserList() {
-        return service.findAll();
+        return repository.findAll();
     }
 
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable int id) {
-        User user = service.findById(id);
+        Optional<User> user = repository.findById(id);
 
-        if (user == null)
+        if (user.isEmpty())
             throw new UserNotFoundException(id);
 
-        return user;
+        return user.get();
     }
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id) {
-        service.deleteById(id);
+        repository.deleteById(id);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User savedUser = service.saveUser(user);
+        User savedUser = repository.save(user);
 
         URI location = ServletUriComponentsBuilder
                 // 현재 요청에 해당하는 URL을 기반으로 URI 빌더를 초기화
