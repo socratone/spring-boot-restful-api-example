@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  # container 이름
+  mysql:
+    image: "mysql:8-oracle"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: socratone-database
+      MYSQL_USER: socratone
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"

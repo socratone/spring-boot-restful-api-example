@@ -2,10 +2,18 @@
 
 스프링 부트를 이용한 기본적인 Restful API 예제를 구현합니다.
 
-## 개발 서버 실행
+## API 서버 실행
 
 ```
 ./mvnw spring-boot:run
+```
+
+## MySQL 활성화
+
+docker desktop 설치 필요.
+
+```
+docker-compose up --build
 ```
 
 ## Swagger 문서
