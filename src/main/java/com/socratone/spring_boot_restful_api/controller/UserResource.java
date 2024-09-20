@@ -1,4 +1,4 @@
-package com.socratone.spring_boot_restful_api;
+package com.socratone.spring_boot_restful_api.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.socratone.spring_boot_restful_api.model.Post;
+import com.socratone.spring_boot_restful_api.model.User;
+import com.socratone.spring_boot_restful_api.repository.PostRepository;
+import com.socratone.spring_boot_restful_api.repository.UserRepository;
+import com.socratone.spring_boot_restful_api.utils.UserNotFoundException;
 
 import jakarta.validation.Valid;
 

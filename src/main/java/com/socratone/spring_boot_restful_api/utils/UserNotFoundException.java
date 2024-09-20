@@ -1,4 +1,4 @@
-package com.socratone.spring_boot_restful_api;
+package com.socratone.spring_boot_restful_api.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

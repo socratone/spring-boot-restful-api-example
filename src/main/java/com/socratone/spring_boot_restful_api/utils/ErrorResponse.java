@@ -1,4 +1,4 @@
-package com.socratone.spring_boot_restful_api;
+package com.socratone.spring_boot_restful_api.utils;
 
 public class ErrorResponse {
     private String message;

@@ -1,4 +1,4 @@
-package com.socratone.spring_boot_restful_api;
+package com.socratone.spring_boot_restful_api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
