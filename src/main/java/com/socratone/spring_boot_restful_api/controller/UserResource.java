@@ -23,22 +23,22 @@ import java.util.Optional;
 
 @RestController
 public class UserResource {
-    private UserRepository repository;
+    private UserRepository userRepository;
     private PostRepository postRepository;
 
-    public UserResource(UserRepository repository, PostRepository postRepository) {
-        this.repository = repository;
+    public UserResource(UserRepository userRepository, PostRepository postRepository) {
+        this.userRepository = userRepository;
         this.postRepository = postRepository;
     }
 
     @GetMapping("/users")
     public List<User> getUserList() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable int id) {
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty())
             throw new UserNotFoundException(id);
@@ -48,12 +48,12 @@ public class UserResource {
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id) {
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User savedUser = repository.save(user);
+        User savedUser = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
                 // 현재 요청에 해당하는 URL을 기반으로 URI 빌더를 초기화
@@ -74,7 +74,7 @@ public class UserResource {
 
     @GetMapping("/users/{id}/posts")
     public List<Post> getUserPostList(@PathVariable int id) {
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty())
             throw new UserNotFoundException(id);
@@ -84,7 +84,7 @@ public class UserResource {
 
     @PostMapping("/users/{id}/posts")
     public void createUserPost(@PathVariable int id, @Valid @RequestBody Post post) {
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty())
             throw new UserNotFoundException(id);
