@@ -18,9 +18,11 @@ import java.util.Optional;
 @RestController
 public class UserResource {
     private UserRepository repository;
+    private PostRepository postRepository;
 
-    public UserResource(UserRepository repository) {
+    public UserResource(UserRepository repository, PostRepository postRepository) {
         this.repository = repository;
+        this.postRepository = postRepository;
     }
 
     @GetMapping("/users")
@@ -62,5 +64,29 @@ public class UserResource {
                 // URI를 인자로 받아 생성된 리소스의 위치를 나타내는 Location 헤더를 설정
                 .created(location)
                 .build();
+    }
+
+    @GetMapping("/users/{id}/posts")
+    public List<Post> getUserPostList(@PathVariable int id) {
+        Optional<User> user = repository.findById(id);
+
+        if (user.isEmpty())
+            throw new UserNotFoundException(id);
+
+        return user.get().getPosts();
+    }
+
+    @PostMapping("/users/{id}/posts")
+    public void createUserPost(@PathVariable int id, @Valid @RequestBody Post post) {
+        Optional<User> user = repository.findById(id);
+
+        if (user.isEmpty())
+            throw new UserNotFoundException(id);
+
+        post.setUser(user.get());
+
+        postRepository.save(post);
+
+        // response 생략
     }
 }
